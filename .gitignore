@@ -218,3 +218,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# Python environments and caches
+.venv/
+.venv-gpu/
+__pycache__/
+*.pyc
+
+# Large model checkpoints
+*.pth
+*.pt
+
+# Local datasets
+data/
+EuroSAT/
+
+# Temporary files
+*.tmp
