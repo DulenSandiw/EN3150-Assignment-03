@@ -218,3 +218,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+
+
+
+
+
+.env
+.venv/
+EuroSAT_RGB/
+data/EuroSAT_RGB/
+*.pth
+*.pt
