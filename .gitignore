@@ -231,3 +231,6 @@ EuroSAT_RGB/
 data/EuroSAT_RGB/
 *.pth
 *.pt
+
+
+checkpoints/
