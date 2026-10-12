@@ -1,0 +1,20 @@
+{
+  "csv_rows": 27000,
+  "images_on_disk": 27000,
+  "successfully_decoded_rows": 27000,
+  "split_counts": {
+    "train": 18900,
+    "test": 4050,
+    "validation": 4050
+  },
+  "image_sizes": {
+    "(64, 64)": 27000
+  },
+  "colour_modes": {
+    "RGB": 27000
+  },
+  "issue_count": 0,
+  "exact_duplicate_groups": 0,
+  "cross_split_duplicate_groups": 0,
+  "status": "PASS"
+}
