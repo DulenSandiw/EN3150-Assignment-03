@@ -68,7 +68,7 @@ def evaluate(model_name, checkpoint_path, loader, device):
         zero_division=0,
     )
 
-    
+
     class_names = [
     "AnnualCrop",
     "Forest",
