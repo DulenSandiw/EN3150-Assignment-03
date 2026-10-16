@@ -221,16 +221,23 @@ __marimo__/
 
 
 
-
-
-
-
+# Python environments and caches
 .env
 .venv/
-EuroSAT_RGB/
-data/EuroSAT_RGB/
+.venv-gpu/
+__pycache__/
+*.pyc
+
+# Large model checkpoints
 *.pth
 *.pt
-
-
 checkpoints/
+
+# Local datasets
+data/
+EuroSAT/
+EuroSAT_RGB/
+data/EuroSAT_RGB/
+
+# Temporary files
+*.tmp
