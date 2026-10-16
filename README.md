@@ -142,6 +142,44 @@ python plot_pretrained_curves.py
 python plot_model_comparison.py
 ```
 
+### 6. Shared Evaluation & Benchmarking (Member 4)
+A single pipeline under `evaluation/` scores all four models (Model A, Model B,
+MobileNetV2, EfficientNet-B0) the same way, so results are directly comparable:
+
+```bash
+# Test-set accuracy / precision / recall / confusion matrix for every model
+# (needs the local EuroSAT folder + each model's checkpoint file)
+python evaluation/evaluate.py --model all --data-dir "path/to/EuroSAT"
+
+# Parameter counts, model size, estimated MACs and inference latency
+# (does NOT need the dataset - only the model definitions/checkpoints)
+python evaluation/benchmark.py --model all
+
+# Builds the Model A vs Model B and Model B vs pretrained comparison tables,
+# falling back to each member's already-committed metrics.json when this
+# pipeline hasn't been (re)run for a given model yet.
+python evaluation/compare_models.py
+```
+
+`evaluation/registry.py` is the shared source of truth for how each model is
+built/loaded/preprocessed; `evaluation/results/` holds the generated
+metrics/CSVs. See the warnings printed by `compare_models.py` for any model
+still missing a checkpoint or test-set evaluation.
+
+> **Open items for the team (tracked while integrating the final report):**
+> - Member 1: Model A has no test-set evaluation yet (only train/val were
+>   tracked during training) - please share the checkpoint status or run
+>   `evaluation/evaluate.py --model model_a` once the dataset is available.
+> - Member 2: the three Model B training scripts don't set a random seed, so
+>   the Adam/SGD/momentum comparison is confounded by different random
+>   initializations. The `checkpoints/` folder (gitignored) also isn't in the
+>   repo - please share the three `.pth` files for benchmarking.
+> - Member 3: re-running the exact freeze/unfreeze logic from
+>   `finetune_pretrained.py`/`finetune_efficientnet.py` gives 898,890 /
+>   1,142,202 trainable parameters, not the 425,098 / 832,234 shown in the
+>   table below - worth reconciling before the final report. The
+>   `outputs/*/fine_tuning/best_model.pth` checkpoints also aren't committed.
+
 ---
 
 ## Experimental Results (Pretrained Models)
@@ -194,7 +232,7 @@ Evaluation was performed on the held-out test split (4,050 images) using the bes
   - [x] Test set evaluation with full classification reports and confusion matrices (`evaluate_pretrained.py`).
   - [x] Fine-tuning learning curves (`plot_pretrained_curves.py`).
   - [x] Pretrained model comparative performance chart (`plot_model_comparison.py`).
-- [ ] **Custom CNN Model A**: Standard custom CNN architecture implementation and training.
-- [ ] **Custom CNN Model B**: Lightweight custom CNN using depthwise separable convolutions (param count $\le$ 100,000).
-- [ ] **Optimization Experiments**: Optimizer benchmarking (e.g., Adam vs. SGD / learning rate schedules) on custom CNNs.
-- [ ] **Final Consolidated Evaluation & Report**: Comparative analysis across Custom Model A, Custom Model B, MobileNetV2, and EfficientNet-B0.
+- [x] **Custom CNN Model A**: Standard CNN implemented and trained for 20 epochs (`models/model_a.py`, `train_model_a.py`); 24,234 trainable parameters; checkpoint + learning curves saved. Test-set evaluation still pending (see open items above).
+- [x] **Custom CNN Model B**: Depthwise-separable lightweight CNN implemented and trained for 20 epochs (`models/model_b.py`, `training/train_model_b*.py`); 14,218 trainable parameters (within the 100,000 cap).
+- [x] **Optimization Experiments**: Adam / SGD / SGD+momentum compared under matched conditions on Model B, with test metrics + confusion matrices for each (`results/model_b_*_metrics.json`).
+- [ ] **Final Consolidated Evaluation & Report**: Shared `evaluation/evaluate.py`, `evaluation/benchmark.py` and `evaluation/compare_models.py` pipeline added - comparison tables generated (`evaluation/results/`), but blocked on Model A test metrics and the missing Model B / pretrained checkpoint files (see open items above).

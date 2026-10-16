@@ -1,0 +1,3 @@
+Model,Test Accuracy,Macro Precision,Macro Recall,Total Params,Trainable Params,Model Size (MB),Est. MACs (M),"Latency (ms, batch=1)",Throughput (img/s),Train Time/Epoch (s),Metrics source
+Model A (Standard CNN),N/A,N/A,N/A,"24,234","24,234",0.10,11.21,0.239,4189.6,36.4,not evaluated yet
+Model B (Depthwise-Separable CNN),94.74%,94.55%,94.65%,"14,218","14,218",0.07,8.57,0.712,1405.2,N/A,results/model_b_momentum_metrics.json (best of 3 optimizers)
