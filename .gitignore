@@ -220,7 +220,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 
-<<<<<<< HEAD
+
 # Python environments and caches
 .env
 .venv/
@@ -241,4 +241,3 @@ data/EuroSAT_RGB/
 
 # Temporary files
 *.tmp
->>>>>>> origin/main
