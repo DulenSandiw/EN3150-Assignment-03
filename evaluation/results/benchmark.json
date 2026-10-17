@@ -1,0 +1,86 @@
+{
+  "model_a": {
+    "model": "model_a",
+    "display_name": "Model A (Standard CNN)",
+    "checkpoint_used": "/media/ransara/4aaec391-7176-4528-a2a0-49ce48f05906/RansaraData/PR/Assignment_3/EN3150-Assignment-03/results/model_a_adam_01/best_model.pt",
+    "total_parameters": 24234,
+    "trainable_parameters": 24234,
+    "model_size_mb": 0.09636592864990234,
+    "model_size_source": "checkpoint_file",
+    "estimated_macs": 11207296,
+    "estimated_gmacs": 0.011207296,
+    "input_shape": [
+      3,
+      64,
+      64
+    ],
+    "device": "cpu",
+    "batch_size": 1,
+    "mean_latency_ms": 0.23868355056038126,
+    "std_latency_ms": 0.017208729535069033,
+    "throughput_images_per_sec": 4189.64774762316
+  },
+  "model_b": {
+    "model": "model_b",
+    "display_name": "Model B (Depthwise-Separable CNN)",
+    "checkpoint_used": null,
+    "total_parameters": 14218,
+    "trainable_parameters": 14218,
+    "model_size_mb": 0.07112979888916016,
+    "model_size_source": "untrained_state_dict_estimate",
+    "estimated_macs": 8572224,
+    "estimated_gmacs": 0.008572224,
+    "input_shape": [
+      3,
+      64,
+      64
+    ],
+    "device": "cpu",
+    "batch_size": 1,
+    "mean_latency_ms": 0.7116374508768786,
+    "std_latency_ms": 0.02952263919494924,
+    "throughput_images_per_sec": 1405.2099123898013
+  },
+  "mobilenet_v2": {
+    "model": "mobilenet_v2",
+    "display_name": "MobileNetV2 (fine-tuned)",
+    "checkpoint_used": null,
+    "total_parameters": 2236682,
+    "trainable_parameters": 898890,
+    "model_size_mb": 8.76087474822998,
+    "model_size_source": "untrained_state_dict_estimate",
+    "estimated_macs": 24461312,
+    "estimated_gmacs": 0.024461312,
+    "input_shape": [
+      3,
+      64,
+      64
+    ],
+    "device": "cpu",
+    "batch_size": 1,
+    "mean_latency_ms": 5.799761951493565,
+    "std_latency_ms": 0.34096476158644146,
+    "throughput_images_per_sec": 172.4208697466416
+  },
+  "efficientnet_b0": {
+    "model": "efficientnet_b0",
+    "display_name": "EfficientNet-B0 (fine-tuned)",
+    "checkpoint_used": null,
+    "total_parameters": 4020358,
+    "trainable_parameters": 1142202,
+    "model_size_mb": 15.615706443786621,
+    "model_size_source": "untrained_state_dict_estimate",
+    "estimated_macs": 31979392,
+    "estimated_gmacs": 0.031979392,
+    "input_shape": [
+      3,
+      64,
+      64
+    ],
+    "device": "cpu",
+    "batch_size": 1,
+    "mean_latency_ms": 5.76760420226492,
+    "std_latency_ms": 0.2782647628544317,
+    "throughput_images_per_sec": 173.38221641618597
+  }
+}
