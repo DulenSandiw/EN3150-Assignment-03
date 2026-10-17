@@ -60,6 +60,12 @@ def main():
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--lr", type=float, default=0.001)
     parser.add_argument("--run-name", default="model_a_adam_01")
+    parser.add_argument(
+        "--optimizer",
+        choices=["adam", "sgd", "sgd_momentum"],
+        default="adam",
+    )
+    parser.add_argument("--momentum", type=float, default=0.9)
     args = parser.parse_args()
 
     # Fix random seeds to make experiments more reproducible.
@@ -89,13 +95,31 @@ def main():
         csv_path=project_dir / "splits.csv",
         batch_size=args.batch_size,
     )
-
     model = StandardCNN(num_classes=10).to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.Adam(
-        model.parameters(),
-        lr=args.lr,
-    )
+
+    if args.optimizer == "adam":
+        optimizer = torch.optim.Adam(
+            model.parameters(),
+            lr=args.lr,
+        )
+    elif args.optimizer == "sgd":
+        optimizer = torch.optim.SGD(
+            model.parameters(),
+            lr=args.lr,
+        )
+    else:
+        optimizer = torch.optim.SGD(
+            model.parameters(),
+            lr=args.lr,
+            momentum=args.momentum,
+        )
+
+    print("Optimizer:", args.optimizer)
+    print("Learning rate:", args.lr)
+
+    if args.optimizer == "sgd_momentum":
+        print("Momentum:", args.momentum)
 
     best_val_loss = float("inf")
 
@@ -160,6 +184,12 @@ def main():
                         "seed": seed,
                         "learning_rate": args.lr,
                         "batch_size": args.batch_size,
+                        "optimizer_name": args.optimizer,
+                        "momentum":(
+                            args.momentum
+                            if args.optimizer == "sgd_momentum"
+                            else 0.0
+                        ),
                     },
                     output_dir / "best_model.pt",
                 )
